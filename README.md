@@ -4,7 +4,7 @@ To run this Flask application locally, follow these steps:<br>
    Make sure you have Python installed, then install the necessary libraries by running:<br>
    pip install Flask pandas lifelines matplotlib<br>
 ### Step 2: Save Your Files<br>
-1. **Create the Project Folder**<br>  
+1. **Create the Project Folder** 
    In your working directory, create a folder (e.g., survival_analysis_app).<br>
 2. **Save app.py  (Flask Application)**<br>
    Save your Flask application code in a file named app.py inside the survival_analysis_app folder.<br>
