@@ -8,7 +8,7 @@ To run this Flask application locally, follow these steps:<br>
    In your working directory, create a folder (e.g., survival_analysis_app).<br>
 2. **Save app.py  (Flask Application)**<br>
    Save your Flask application code in a file named app.py inside the survival_analysis_app folder.<br>
-3. **Create a templates Folder**<br>
+3. **Create a templates Folder**
    Inside survival_analysis_app, create a folder named templates and save the index.html file (HTML template) you just designed into this folder.<br>
 ### Step 3: Run the Flask Application<br>
 1. Open a terminal or command prompt.<br>
