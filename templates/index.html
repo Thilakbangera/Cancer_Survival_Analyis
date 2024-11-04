@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaplan-Meier Survival Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        label, input, button {
+            font-size: 16px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        input[type="number"] {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Flex container for explanation, graph, and results */
+        .result-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+        }
+
+        /* Explanation on the left */
+        .explanation-container {
+            flex: 1;
+            text-align: left;
+            padding: 20px;
+        }
+
+        /* Centered graph container */
+        .graph-container {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+        }
+        .graph-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Results container on the right */
+        .results-container {
+            flex: 1;
+            text-align: left;
+            padding: 20px;
+        }
+        .results-container h2, .explanation-container h2 {
+            color: #4CAF50;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .results-container p, .explanation-container p {
+            font-size: 14px;
+            color: #555;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kaplan-Meier Cancer Survival Analysis</h1>
+    <form method="post">
+        <label for="age">Enter Age(17-44):</label>
+        <input type="number" id="age" name="age" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if survival_data %}
+    <div class="result-container">
+        <!-- Explanation Container (Left) -->
+        <div class="explanation-container">
+            <h2>Graph Explanation</h2>
+            <p><strong>X-Axis (Weeks):</strong> Represents the time in weeks observed in the study.</p>
+            <p><strong>Y-Axis (Survival Probability):</strong> Indicates the probability of survival at each point in time.</p>
+            <p><strong>Survival Curve:</strong> Shows the probability of survival over time for the selected age group. Each drop in the curve represents an event (e.g., arrest or failure).</p>
+            <p><strong>Confidence Interval:</strong> The shaded area around the curve shows the 95% confidence interval, giving a range for the estimated survival probability.</p>
+        </div>
+
+        <!-- Graph Container (Center) -->
+        <div class="graph-container">
+            {% if graph_url %}
+                <h2>Survival Function Plot</h2>
+                <img src="{{ graph_url }}" alt="Survival Plot">
+            {% endif %}
+        </div>
+
+        <!-- Results Container (Right) -->
+        <div class="results-container">
+            <h2>Results</h2>
+            {% if survival_data.error %}
+                <p><strong>Error:</strong> {{ survival_data.error }}</p>
+            {% else %}
+                <p><strong>Survival Probability:</strong> {{ survival_data['Survival Probability'] }}</p>
+                <p><strong>Coefficient:</strong> {{ survival_data['Coefficient'] }}</p>
+                <p><strong>Hazard Ratio:</strong> {{ survival_data['Hazard Ratio'] }}</p>
+                <p><strong>P-Value:</strong> {{ survival_data['P-Value'] }}</p>
+                <p><strong>Confidence Interval Lower:</strong> {{ survival_data['CI Lower'] }}</p>
+                <p><strong>Confidence Interval Upper:</strong> {{ survival_data['CI Upper'] }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
